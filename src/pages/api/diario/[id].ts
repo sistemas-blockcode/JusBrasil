@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
-import puppeteer, { Page } from 'puppeteer-extra';
+import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import prisma from '@/lib/prisma';
 import axios from 'axios';

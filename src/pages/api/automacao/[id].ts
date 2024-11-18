@@ -1,9 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/lib/prisma';
-import puppeteer, { Page } from 'puppeteer-extra';
+import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import path from 'path';
 import axios from 'axios';
+import { Page } from 'puppeteer';
 
 puppeteer.use(StealthPlugin());
 
