@@ -1,0 +1,56 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Administrador {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  senha    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cliente {
+  id               Int      @id @default(autoincrement())
+  nome             String
+  cpf              String   @unique
+  loginJusbrasil   String
+  senhaJusbrasil   String
+  rgFrontUrl       String
+  rgBackUrl        String
+  dataNascimento   DateTime
+  linkProcessos    String[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  automacoes       Automacao[]
+}
+
+model Automacao {
+  id           Int      @id @default(autoincrement())
+  tipo         TipoAutomacao
+  status       StatusAutomacao
+  dataExecucao DateTime @default(now())
+  mensagemErro String?
+  clienteId    Int
+  cliente      Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)  // Adicionando o onDelete: Cascade
+}
+
+
+enum TipoAutomacao {
+  PROCESSO
+  DIARIO
+  JURISPRUDENCIA
+  PECA_PROCESSUAL
+}
+
+enum StatusAutomacao {
+  PENDENTE
+  EM_ANDAMENTO
+  CONCLUIDO
+  ERRO
+}
